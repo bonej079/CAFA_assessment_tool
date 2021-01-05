@@ -1,0 +1,35 @@
+---
+assess:
+        file1: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model1_final/orengo-funfams-1_1_all.txt
+        file2: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model2_final/orengo-funfams-3_1_all.txt
+        file3: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model3_final/orengo-funfams-1_2_all.txt
+        file4: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model4_basic/orengo-funfams-3_2_all.txt
+        file5: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model5_final/orengo-funfams-4_1_all.txt
+        file6: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model6_basic/orengo-funfams-4_2_all.txt
+        file7: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model7_final/orengo-funfams-4_3_all.txt
+        file8: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model8_final/orengo-funfams-1_3_all.txt
+        file9: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model9_final/orengo-funfams-3_3_all.txt
+        # Up to 12 prediction files allowed
+        obo: ./precrec/go_cafa3.obo
+        benchmark: ./precrec/benchmark/CAFA3_benchmarks/
+        results: ./results/
+plot:
+        results: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results
+        title: all
+        smooth: N
+        file1: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-1_1_all
+        file2: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-3_1_all
+        file3: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-1_2_all
+        file4: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-3_2_all
+        file5: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-4_1_all
+        file6: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-4_2_all
+        file7: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-4_3_all
+        file8: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-1_3_all
+        file9: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-3_3_all
+
+        #file2: ZZZ_2_9606
+        #file3: XXX_1_9606
+        # Above files will be shown on one plot
+        # We recommend only plotting results for the same species together
+        # You can add up to 12 files
+        # title is optional

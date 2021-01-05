@@ -1,12 +1,11 @@
-# Copyright 2013 by Kamil Koziara. All rights reserved.               
-# This code is part of the Biopython distribution and governed by its    
-# license.  Please see the LICENSE file that should have been included   
+# Copyright 2013 by Kamil Koziara. All rights reserved.
+# This code is part of the Biopython distribution and governed by its
+# license.  Please see the LICENSE file that should have been included
 # as part of this package.
 
 """
 I/O operations for Enrichment.
 """
-from Bio._py3k import range
 
 import csv, ast
 from Ontology import Enrichment, EnrichmentEntry
@@ -30,11 +29,11 @@ class EnrichmentReader(OntoReader):
     """
     Class for reading an enrichment from a file.
     """
-    
+
     def __init__(self, file_handle, read_attrs = True):
         self._handle = file_handle
         self._read_attrs = read_attrs
-    
+
     def read(self):
         try:
             creader = csv.reader(self._handle, delimiter = '\t')
@@ -53,10 +52,10 @@ class EnrichmentReader(OntoReader):
             for _ in range(warnings_num):
                 warnings.append(next(creader)[1])
             return Enrichment(method, entries, warnings, corr_names)
-            
+
         except StopIteration:
             raise Exception("Error while reading: Enrichment file not valid.")
-        
+
 def _entry_to_row(entry, corr_names, write_attrs):
     corr_string = "|".join([str(entry.corrections[x]) for x in corr_names])
     return [entry.id, entry.name, entry.p_value, corr_string, entry.attrs]
@@ -65,11 +64,11 @@ class EnrichmentWriter(OntoWriter):
     """
     Class for writing an enrichment to a file.
     """
-    
+
     def __init__(self, file_handle, write_attrs = True):
         self._handle = file_handle
         self._write_attrs = write_attrs
-        
+
     def write(self, enrichment):
         writer = csv.writer(self._handle, delimiter = '\t')
         writer.writerow(["# " + enrichment.method])

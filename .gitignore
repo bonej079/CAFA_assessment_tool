@@ -1,1 +1,11 @@
 *.pyc
+/results/
+/plots/
+/precrec/benchmark/CAFA3_benchmarks/groundtruth/a_cafa3_all_targets.txt
+/precrec/benchmark/CAFA3_benchmarks/groundtruth/b_cafa3_all_targets.txt
+/precrec/benchmark/CAFA3_benchmarks/groundtruth/b_cafa3_all_targets_sorted_unique.txt
+/precrec/benchmark/CAFA3_benchmarks/lists/a_cafa3_all_targets.txt
+/precrec/benchmark/CAFA3_benchmarks/lists/a_cafa3_all_targets_sorted_unique.txt
+/precrec/go_cafa3_ancestors_bpo.txt
+/precrec/go_cafa3_ancestors_cco.txt
+/precrec/go_cafa3_ancestors_mfo.txt

@@ -1,6 +1,6 @@
-# Copyright 2013 by Kamil Koziara. All rights reserved.               
-# This code is part of the Biopython distribution and governed by its    
-# license.  Please see the LICENSE file that should have been included   
+# Copyright 2013 by Kamil Koziara. All rights reserved.
+# This code is part of the Biopython distribution and governed by its
+# license.  Please see the LICENSE file that should have been included
 # as part of this package.
 
 """
@@ -9,7 +9,7 @@ Module giving acces to I/O modules through generic methods.
 
 
 from Bio.File import as_handle
-from Bio._py3k import basestring
+# from Bio._py3k import basestring
 
 from . import OboIO
 from . import GoaIO
@@ -48,11 +48,11 @@ def write(data, handle, file_format, **params):
                pygraphviz to be installed)
              - etsv
      - params - additional parameters
-     
+
     You should close the handle after calling this function.
 
     """
-    
+
     if not isinstance(file_format, basestring):
         raise TypeError("Need a string for the file format (lower case)")
     if not file_format:
@@ -69,7 +69,7 @@ def write(data, handle, file_format, **params):
 def read(handle, file_format, **params):
     """
     Read file in given format.
-    
+
     Parameters:
      - handle - File handle object to read from, or filename as a string,
      - file_format - lower case string describing the file format to write,
@@ -86,7 +86,7 @@ def read(handle, file_format, **params):
     if not isinstance(file_format, basestring):
         raise TypeError("Need a string for the file format (lower case)")
     if not file_format:
-        raise ValueError("Format required (lower case string)")          
+        raise ValueError("Format required (lower case string)")
     if file_format != file_format.lower():
         raise ValueError("Format string '%s' should be lower case" % format)
     with as_handle(handle, 'rU') as fp:
@@ -99,21 +99,21 @@ def read(handle, file_format, **params):
 def parse(handle, file_format):
     """
     Iterate over a gene ontology file.
-    
+
     Parameters:
      - handle - File handle object to read from, or filename as a string,
      - file_format - lower case string describing the file format to write,
          Formats:
              - obo
              - tsv
-             
+
     You should close the handle after calling this function.
     """
 
     if not isinstance(file_format, basestring):
         raise TypeError("Need a string for the file format (lower case)")
     if not file_format:
-        raise ValueError("Format required (lower case string)")          
+        raise ValueError("Format required (lower case string)")
     if file_format != file_format.lower():
         raise ValueError("Format string '%s' should be lower case" % format)
     with as_handle(handle, 'rU') as fp:
@@ -129,7 +129,7 @@ def parse(handle, file_format):
 def pretty_print(enrichment, graph, handle, file_format, **params):
     """
     Print results returned by enrichment finder in a specified format.
-    
+
      Parameters:
      - enrichment - result from EnrichmentFinder
      - graph - OntologyGraph with containing enriched nodes
@@ -141,10 +141,10 @@ def pretty_print(enrichment, graph, handle, file_format, **params):
              - txt
              - html
      - params - additional parameters
-     
+
     You should close the handle after calling this function.
     """
-    
+
     if not isinstance(file_format, basestring):
         raise TypeError("Need a string for the file format (lower case)")
     if not file_format:

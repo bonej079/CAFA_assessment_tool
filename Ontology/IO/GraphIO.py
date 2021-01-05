@@ -1,23 +1,23 @@
-# Copyright 2013 by Kamil Koziara. All rights reserved.               
-# This code is part of the Biopython distribution and governed by its    
-# license.  Please see the LICENSE file that should have been included   
+# Copyright 2013 by Kamil Koziara. All rights reserved.
+# This code is part of the Biopython distribution and governed by its
+# license.  Please see the LICENSE file that should have been included
 # as part of this package.
 
 """
 I/O and visualization operations on graphs.
 """
 from __future__ import print_function
-from Bio._py3k import basestring
+# from Bio._py3k import basestring
 
 import sys
 from .Interfaces import OntoWriter
 
 _INDENT = "  "
-        
+
 class GmlWriter(OntoWriter):
     """
     Writes graph to gml format.
-    
+
     Simple gml writer. Writes gml files given DiGraph instance. It stores nodes
     and edges with their respective data attribute. Note that data attribute
     is stored only if it is instance of dict class.
@@ -25,7 +25,7 @@ class GmlWriter(OntoWriter):
     >>> from Bio.Ontology.Graph import DiGraph
     >>> from Bio._py3k import StringIO
     >>> out = StringIO()
-    
+
     Constructing the graph:
     >>> g = DiGraph([(1, 2), (2,3), (3,2)])
     >>> g.update_node(2, {"a" : {"b" : "string"}, "c" : 3})
@@ -33,7 +33,7 @@ class GmlWriter(OntoWriter):
     Writing the graph:
     >>> writer = GmlWriter(out)
     >>> writer.write(g)
-    
+
     >>> print(out.getvalue())
     graph [
       directed 1
@@ -67,10 +67,10 @@ class GmlWriter(OntoWriter):
       ]
     ]
     """
-    
+
     def __init__(self, file_handle):
         self.handle = file_handle
-                
+
     def data_to_gml(self, label, data, indent):
         lines = []
         if isinstance(data, dict):
@@ -85,17 +85,17 @@ class GmlWriter(OntoWriter):
                 rdata = str(data)
             lines.append(_INDENT * indent + label + " " + rdata)
         return lines
-    
+
     def get_lines(self, graph):
         i = 0
         node_ids = {}
         edges = []
-        
+
         lines = ["graph [", _INDENT + "directed 1"]
-        
+
         for k, v in graph.attrs.items():
             lines += self.data_to_gml(k, v, 1)
-            
+
         for label, node in graph.nodes.items():
             lines.append(_INDENT + "node [")
             lines.append(_INDENT * 2 + "id " + str(i))
@@ -104,12 +104,12 @@ class GmlWriter(OntoWriter):
                 for k, v in node.data.items():
                     lines += self.data_to_gml(k, v, 2)
             lines.append(_INDENT + "]")
-            
+
             for edge in node.succ:
                 edges.append((i, edge.to_node.label, edge.data))
             node_ids[label] = i
             i += 1
-    
+
         for src, target_label, data in edges:
             lines.append(_INDENT + "edge [")
             lines.append(_INDENT * 2  + "source " + str(src))
@@ -123,7 +123,7 @@ class GmlWriter(OntoWriter):
             lines.append(_INDENT + "]")
         lines.append("]")
         return lines
-    
+
     def write(self, graph):
         self.handle.write("\n".join(self.get_lines(graph)))
 
@@ -131,12 +131,12 @@ class GraphVisualizer(OntoWriter):
     """
     Stores graph in png format using graphviz library.
     """
-    
+
     def __init__(self, file_handle, dpi = 96, color = "#00bd28"):
         self.handle = file_handle
         self.dpi = dpi
         self.color = color
-    
+
     def term_to_label(self, term):
         return "{0}\n{1}".format(term.id, term.name)
 
@@ -150,20 +150,20 @@ class GraphVisualizer(OntoWriter):
             viz_graph.graph_attr.update(dpi = str(self.dpi))
             viz_graph.node_attr.update(shape="box", style="rounded,filled")
             viz_graph.edge_attr.update(shape="normal", color="black", dir="back")
-            
+
             entry_labels = {}
-            
+
             for node in graph.nodes.values():
                 new_label = self.term_to_label(node.data)
                 viz_graph.add_node(new_label, fillcolor = self.color)
                 entry_labels[node.label] = new_label
-                
+
             for label, node in graph.nodes.items():
                 for edge in node.succ:
                     viz_graph.add_edge(entry_labels[edge.to_node.label], entry_labels[label],  label=edge.data)
-                    
+
             return viz_graph
-        
+
     def write(self, graph):
         vg = self.to_printable_graph(graph)
         vg.draw(self.handle, prog="dot")

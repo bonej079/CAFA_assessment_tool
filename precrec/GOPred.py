@@ -194,6 +194,7 @@ class GOPred:
         n_models = 0
         filename = pred_path.name.split('/')[-1]
         filenamefields = filename.split('.')[0].split('_')
+        # print(f"JB: {filenamefields}")
         self.taxon = filenamefields[2]
         #inline = open(pred_path)
         for inline in pred_path:
@@ -224,8 +225,9 @@ class GOPred:
             elif state == "model":
                 n_models += 1
                 n_accuracy = 0
-                if n_models > 3:
-                    raise ValueError("Too many models. Only up to 3 allowed")
+                max_models = 10
+                if n_models > max_models:
+                    raise ValueError(f"Too many models. Only up to {max_models} allowed!")
                 correct, errmsg = self._model_check(inline)
                 if correct and self.model != int(filenamefields[1]):
                     correct = False
@@ -250,6 +252,47 @@ class GOPred:
                 else:
                     correct, errmsg = self._accuracy_check(inline)
             elif state == "go_prediction":
+                import re
+                regexp = r'([A-Z0-9]+) +(GO:[0-9]+) +([0-9\.]+)'
+
+                inline = re.sub(regexp, r'\1\t\2\t\3', inline) # fix spaces for tabs
+
+                # Fix bad confidence values (not exhaustive)
+                inline_split = inline.strip().split("\t")
+                if len(inline_split) != 3:
+                	print(f"JB: ERROR: {inline} is in the incorrect format")
+                	self._handle_error(False, "JB: GO Prediction is not in the right format", inline)
+
+                if '.' not in inline_split[2]:
+                    # print(f"JB: BEFORE: {inline}")
+                    inline = f"{inline_split[0]}\t{inline_split[1]}\t{inline_split[2]}.00"
+                    # print(f"JB: AFTER: {inline}")
+                else:
+                    len_part_2 = len(inline_split[2].split('.')[1])
+                    
+
+                    if len_part_2 != 2:
+                        if len_part_2 < 2:
+                            # print(f"JB: BEFORE: {inline}")
+                            inline = f"{inline_split[0]}\t{inline_split[1]}\t{inline_split[2]}0"
+                            # print(f"JB: AFTER: {inline}")
+                        else:  # Too many .
+                            # print(f"JB: BEFORE: {inline}")
+                            inline = f"{inline_split[0]}\t{inline_split[1]}\t0.00"
+                            # print(f"JB: AFTER: {inline}")
+
+                # Fix for confidence - must be between 0.00 and 1.00, inclusive
+                inline_split = inline.strip().split("\t")                
+                if float(inline.split("\t")[2]) < 0.00:
+                    # print(f"JB: BEFORE: {inline}")                    
+                    inline = f"{inline_split[0]}\t{inline_split[1]}\t0.00"
+                    # print(f"JB: AFTER: {inline}")
+                    # print(inline)
+                elif float(inline.split("\t")[2]) > 1.00:
+                    # print(f"JB: BEFORE: {inline}")
+                    inline = f"{inline_split[0]}\t{inline_split[1]}\t1.00"
+                    # print(f"JB: AFTER: {inline}")
+
                 correct, errmsg = self._go_prediction_check(inline)
                 self._handle_error(correct, errmsg, inline)
                 if first_prediction:

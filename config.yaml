@@ -1,15 +1,37 @@
 ---
 assess:
-        file: ZZZ_1_9606.txt 
-        #Only One prediction file allowed
+        file1: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model8_final/orengo-funfams-1_3_all.txt
+        file2: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam1_1_all_go.txt
+        file3: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam1_2_all_go.txt
+        file4: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam1_3_all_go.txt
+        file5: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam2_1_all_go.txt
+        file6: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam2_2_all_go.txt
+        file7: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam3_1_all_go.txt
+        file8: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam3_2_all_go.txt
+        file9: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam4_1_all_go.txt
+        file10: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam4_2_all_go.txt
+        file11: /media/jbon4/Data/data/BonelloFunfams/metrics/BonelloFunFam5_1_all_go.txt
+        # file9: /mnt/Data/data/CAFA3_target_predictions/CAFA3_target_predictions/CAFA3_submission_files/model9_final/orengo-funfams-3_3_all.txt
+        # Up to 12 prediction files allowed
         obo: ./precrec/go_cafa3.obo
         benchmark: ./precrec/benchmark/CAFA3_benchmarks/
         results: ./results/
 plot:
-        results: ./results/
-        title: 9606
+        results: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results
+        title: all
         smooth: N
-        file1: ZZZ_1_9606
+        file1: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/orengo-funfams-1_3_all
+        file2: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam1_1_all_go
+        file3: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam1_2_all_go
+        file4: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam1_3_all_go
+        file5: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam2_1_all_go
+        file6: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam2_2_all_go
+        file7: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam3_1_all_go
+        file8: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam3_2_all_go
+        file9: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam4_1_all_go
+        file10: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam4_2_all_go
+        file11: /home/jbon4/Development/python/cafa-assessment/bonej079/CAFA_assessment_tool/results/BonelloFunFam5_1_all_go
+
         #file2: ZZZ_2_9606
         #file3: XXX_1_9606
         # Above files will be shown on one plot
